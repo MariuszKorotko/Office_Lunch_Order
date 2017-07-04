@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Orders:</h2>
+<ul>
+  {% for order in orders %}
+  <li>{{ order.name }}</li>
+  {% endfor %}
+</ul>
+  <a href="{% url 'logged-out' %}"><button>Wyloguj</button></a>
+{% endblock %}
