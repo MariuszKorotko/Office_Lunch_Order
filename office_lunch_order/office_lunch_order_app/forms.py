@@ -1,5 +1,6 @@
-from .models import Order, OrderedDinners
 from django.forms import ModelForm
+from django import forms
+from .models import Order, OrderedDinners
 
 class NewOrderForm(ModelForm):
     class Meta:
@@ -15,3 +16,6 @@ class OrderedDinnersForm(ModelForm):
     class Meta:
         model = OrderedDinners
         fields = ['user', 'dinner', 'order']
+
+class CloseOrderForm(forms.Form):
+    id = forms.IntegerField(widget=forms.HiddenInput())

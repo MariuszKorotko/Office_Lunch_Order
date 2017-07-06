@@ -1,12 +1,11 @@
-# from django.contrib.auth.models import User
 from django.contrib.auth.mixins	import LoginRequiredMixin
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.views import View
 from .forms import *
 
 class OrdersView(LoginRequiredMixin, View):
     def get(self, request):
-        orders = Order.objects.order_by('date_add')
+        orders = Order.objects.order_by('add_date')
         context = { "orders": orders }
         return render(request, "orders.html", context)
 
@@ -45,5 +44,21 @@ class AddOrderView(LoginRequiredMixin, View):
 class OrderDetailsView(LoginRequiredMixin, View):
     def get(self, request, id):
         order = Order.objects.get(pk=id)
-        context = { "order": order}
+        ordered_dinners = order.ordereddinners_set.all()
+        form = CloseOrderForm(initial={'id': id})
+        context = {
+            "order": order,
+            "ordered_dinners": ordered_dinners,
+            "form": form
+        }
         return render(request, "order_details.html", context)
+
+class CloseOrderView(LoginRequiredMixin, View):
+    def post(self, request):
+        form = CloseOrderForm(request.POST)
+        if form.is_valid():
+            id = form.cleaned_data["id"]
+            order = Order.objects.get(pk=id)
+            order.ordered = True
+            order.save()
+        return HttpResponseRedirect('/orders/')

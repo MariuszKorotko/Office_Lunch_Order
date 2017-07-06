@@ -4,8 +4,10 @@
 <ul>
   {% for order in orders %}
   <li><a href="/order_details/{{ order.id }}">{{ order.name }}</a>
-    <a href="/add_order/{{ order.id }}"><button>Join
-    order</button></a>
+    {% if order.ordered == False %}
+      <a href="/add_order/{{ order.id }}"><button>Join
+      order</button></a>
+    {% endif %}
   </li>
   {% endfor %}
 </ul>
