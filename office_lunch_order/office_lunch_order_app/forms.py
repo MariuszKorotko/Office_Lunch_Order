@@ -14,4 +14,4 @@ class AddOrderForm(ModelForm):
 class OrderedDinnersForm(ModelForm):
     class Meta:
         model = OrderedDinners
-        fields = ['user', 'dinner','order']
+        fields = ['user', 'dinner', 'order']

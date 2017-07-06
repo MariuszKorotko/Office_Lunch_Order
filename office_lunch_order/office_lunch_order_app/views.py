@@ -43,4 +43,7 @@ class AddOrderView(LoginRequiredMixin, View):
             return redirect('/orders/')
 
 class OrderDetailsView(LoginRequiredMixin, View):
-    pass
+    def get(self, request, id):
+        order = Order.objects.get(pk=id)
+        context = { "order": order}
+        return render(request, "order_details.html", context)

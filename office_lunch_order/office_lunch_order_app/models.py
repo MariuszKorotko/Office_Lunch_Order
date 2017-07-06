@@ -1,7 +1,6 @@
 from django.db import models
 from django.conf import settings
 from django.core.validators import RegexValidator
-from datetime import datetime
 
 # Create your models here.
 
@@ -31,8 +30,7 @@ class Order(models.Model):
     ordering_user = models.ForeignKey(settings.AUTH_USER_MODEL)
     dinners = models.ManyToManyField(Dinner, through='OrderedDinners')
     ordered = models.BooleanField(default=False)
-    date_add = models.DateTimeField(auto_now_add=True)
-
+    add_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
