@@ -21,12 +21,21 @@ class Dinner(models.Model):
     description = models.TextField()
     price = models.FloatField()
 
+    def __str__(self):
+        result = "{} - {} ({} zł)".format(self.restaurant.name, self.name,
+                                          self.price)
+        return result
+
 class Order(models.Model):
     name = models.CharField(max_length=256, default="Zamawiamy obiad na 13.00!")
     ordering_user = models.ForeignKey(settings.AUTH_USER_MODEL)
-    dinners = models.ManyToManyField(Dinner)
-    ordered = models.BooleanField()
-    date_add = models.DateTimeField(default=datetime.now(), blank=True)
+    dinners = models.ManyToManyField(Dinner, through='OrderedDinners')
+    ordered = models.BooleanField(default=False)
+    date_add = models.DateTimeField(auto_now_add=True)
+
+
+    def __str__(self):
+        return self.name
 
 class OrderedDinners(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)

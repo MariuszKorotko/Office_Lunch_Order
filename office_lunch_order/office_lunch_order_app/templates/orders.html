@@ -1,10 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Orders:</h2>
+<h3>Orders:</h3>
 <ul>
   {% for order in orders %}
-  <li>{{ order.name }}</li>
+  <li><a href="/order_details/{{ order.id }}">{{ order.name }}</a>
+    <a href="/add_order/{{ order.id }}"><button>Join
+    order</button></a>
+  </li>
   {% endfor %}
 </ul>
-  <a href="{% url 'logged-out' %}"><button>Wyloguj</button></a>
+<hr>
+<a href="{% url 'new-order' %}"><button>New order</button></a>
+<a href="{% url 'logged-out' %}"><button>Logout</button></a>
+
 {% endblock %}
