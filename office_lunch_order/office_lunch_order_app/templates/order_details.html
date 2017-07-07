@@ -1,21 +1,24 @@
 {% extends 'base.html' %}
 {% block content %}
-<h3>Order details:</h3>
-<p>{{ order.name }} - {{ order.add_date }}</p>
-<p>Dzisiaj zamawia: <strong>{{ order.ordering_user }}</strong></p>
-<hr>
-<ul>
-{% for dinner in ordered_dinners %}
-    <li>{{ dinner.user }}: {{ dinner.dinner }}
-        tel: {{dinner.dinner.restaurant.phone_number }}</li>
-{% endfor%}
-</ul>
-<form action="{% url 'close-order' %}" method="post">
-    {% csrf_token %}
-    {{ form }}
-    {% if order.ordered == False %}
-      <input type="submit" value="Close order"></input>
-    {% endif %}
-<a href="{% url 'orders' %}"><button>Orders</button></a>
-</form>
+<div class="panel panel-primary">
+    <div class="panel-heading"><strong>Order details:</strong></div>
+    <div class="panel-body">
+        <p>{{ order.name }} - {{ order.add_date }}</p>
+        <p>Dzisiaj zamawia: <strong>{{ order.ordering_user }}</strong></p>
+        <ul>
+            {% for dinner in ordered_dinners %}
+                <li>{{ dinner.user }}: {{ dinner.dinner }}
+                tel: {{dinner.dinner.restaurant.phone_number }}</li>
+            {% endfor%}
+        </ul>
+        <form action="{% url 'close-order' %}" method="post">
+            {% csrf_token %}
+            {{ form }}
+            {% if order.ordered == False %}
+                <p><input class="btn btn-primary"   type="submit"
+                        value="Close order"></input></p>
+            {% endif %}
+            <a href="{% url 'orders' %}"><button>Orders</button></a>
+        </form>
+    </div>
 {% endblock %}

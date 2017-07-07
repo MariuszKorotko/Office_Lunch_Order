@@ -2,7 +2,12 @@
 {% block content %}
 <form	action=""	method="post">
 	{%	csrf_token	%}
-	{{	form.as_p}}
-	<input	type="submit"	value="Add order">
+	<div class="panel panel-primary">
+    <div class="panel-heading"><strong>New order:</strong></div>
+    <div class="panel-body">
+      {{ form.as_p }}
+      <input class="btn btn-primary" type="submit" value="Add order">
+    </div>
+  </div>
 </form>
 {% endblock %}

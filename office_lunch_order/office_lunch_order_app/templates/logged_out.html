@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 
-{% block title %}Logout{% endblock %}
-
 {% block content %}
-  <p><h3>You have logged out!</p></h3>
-  <p><a href="{% url 'login' %}"><button>Zaloguj</button></a></p>
+  <div class="panel panel-default">
+    <div class="panel-heading"><strong>You logged out!</strong></div>
+    <div class="panel-body">
+      <a href="{% url 'login' %}"><button class="btn btn-primary">Zaloguj</button></a>
+    </div>
+  </div>
 {% endblock %}
