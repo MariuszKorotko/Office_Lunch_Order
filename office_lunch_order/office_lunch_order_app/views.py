@@ -6,7 +6,7 @@ from .forms import Order, NewOrderForm, OrderedDinnersForm, CloseOrderForm
 class OrdersView(LoginRequiredMixin, View):
     """GET display orders ordered by date"""
     def get(self, request):
-        orders = Order.objects.order_by('add_date')
+        orders = Order.objects.order_by('-add_date')
         context = { "orders": orders }
         return render(request, "orders.html", context)
 
