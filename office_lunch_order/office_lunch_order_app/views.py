@@ -1,9 +1,10 @@
 from django.contrib.auth.mixins	import LoginRequiredMixin
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.views import View
-from .forms import *
+from .forms import Order, NewOrderForm, OrderedDinnersForm, CloseOrderForm
 
 class OrdersView(LoginRequiredMixin, View):
+    """GET display orders ordered by date"""
     def get(self, request):
         orders = Order.objects.order_by('add_date')
         context = { "orders": orders }
@@ -27,6 +28,7 @@ class NewOrderView(LoginRequiredMixin, View):
 class AddOrderView(LoginRequiredMixin, View):
 
     def get(self, request, id):
+        """Default data for user nad order"""
         form = OrderedDinnersForm(initial={'user': request.user,
                                            'order': id})
         context = {
@@ -43,8 +45,10 @@ class AddOrderView(LoginRequiredMixin, View):
 
 class OrderDetailsView(LoginRequiredMixin, View):
     def get(self, request, id):
+        """Display all dinners to choose"""
         order = Order.objects.get(pk=id)
         ordered_dinners = order.ordereddinners_set.all()
+        # initial CloseOrderForm using id from CloseOrderForm which is hidden
         form = CloseOrderForm(initial={'id': id})
         context = {
             "order": order,
@@ -55,6 +59,8 @@ class OrderDetailsView(LoginRequiredMixin, View):
 
 class CloseOrderView(LoginRequiredMixin, View):
     def post(self, request):
+        """Send data using POST and change value of ordered from Order's
+        model"""
         form = CloseOrderForm(request.POST)
         if form.is_valid():
             id = form.cleaned_data["id"]
