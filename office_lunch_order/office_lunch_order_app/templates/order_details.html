@@ -7,7 +7,8 @@
         <p>Dzisiaj zamawia: <strong>{{ order.ordering_user }}</strong></p>
         <ul>
             {% for dinner in ordered_dinners %}
-                <li>{{ dinner.user }}: {{ dinner.dinner }}
+                <li class="list-group-item">
+                        {{ dinner.user }}: {{ dinner.dinner }}
                 tel: {{dinner.dinner.restaurant.phone_number }}</li>
             {% endfor%}
         </ul>
@@ -15,10 +16,9 @@
             {% csrf_token %}
             {{ form }}
             {% if order.ordered == False %}
-                <p><input class="btn btn-primary"   type="submit"
-                        value="Close order"></input></p>
+                <p><input class="btn btn-primary"   type="submit" value="Close order"></input></p>
             {% endif %}
-            <a href="{% url 'orders' %}"><button>Orders</button></a>
         </form>
+        <a href="{% url 'orders' %}"><button>Orders</button></a>
     </div>
 {% endblock %}

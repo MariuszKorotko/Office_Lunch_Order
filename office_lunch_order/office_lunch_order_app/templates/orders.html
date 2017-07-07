@@ -6,12 +6,12 @@
     <div class="panel-body">
       <ul>
         {% for order in orders %}
-          <li><a href="/order_details/{{ order.id }}">{{ order.name }}</a>
-            ({{order.add_date}})
+          <a href="/order_details/{{ order.id }}" class="list-group-item">
+            {{ order.name }} ({{ order.add_date }})
             {% if order.ordered == False %}
             <a href="/add_order/{{ order.id }}"><button>Join order</button></a>
             {% endif %}
-          </li>
+          </a>
         {% endfor %}
       </ul>
       <div>
