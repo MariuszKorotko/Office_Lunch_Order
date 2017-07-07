@@ -1,8 +1,6 @@
-from django.db import models
-from django.conf import settings
 from django.core.validators import RegexValidator
-
-# Create your models here.
+from django.conf import settings
+from django.db import models
 
 class Restaurant(models.Model):
     name = models.CharField(max_length=256)
@@ -21,7 +19,8 @@ class Dinner(models.Model):
     price = models.FloatField()
 
     def __str__(self):
-        result = "{} - {} ({} zł)".format(self.restaurant.name, self.name,
+        """Display menu with name of restaurant, dinner nam and price"""
+        result = "{} - {} ({} PLN)".format(self.restaurant.name, self.name,
                                           self.price)
         return result
 
