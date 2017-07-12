@@ -28,9 +28,10 @@ class NewOrderView(LoginRequiredMixin, View):
 class AddOrderView(LoginRequiredMixin, View):
 
     def get(self, request, id):
-        """Default data for user nad order"""
+        """Default data for user and order"""
         form = OrderedDinnersForm(initial={'user': request.user,
-                                           'order': id})
+                                           'order': id
+                                           })
         context = {
             "form": form
         }
