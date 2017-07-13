@@ -9,15 +9,15 @@
           <a href="/order_details/{{ order.id }}" class="list-group-item">
             {{ order.name }} ({{ order.add_date }})
             {% if order.ordered == False %}
-            <a href="/add_order/{{ order.id }}"><button>Join order</button></a>
+            <a href="/add_order/{{ order.id }}"><button class="btn">Join
+              order</button></a>
             {% endif %}
           </a>
         {% endfor %}
-      </ul>
-      <div>
-      <p><a href="{% url 'new-order' %}"><button>New order</button></a></p>
-      <p><a href="{% url 'logged-out' %}"><button class="btn btn-primary">
+        <p><a href="{% url 'new-order' %}"><button class="btn">New order</button></a></p>
+        <p><a href="{% url 'logged-out' %}"><button class="btn btn-primary">
         Logout</button></a></p>
-      </div>
+      </ul>
     </div>
+  </div>
     {% endblock %}

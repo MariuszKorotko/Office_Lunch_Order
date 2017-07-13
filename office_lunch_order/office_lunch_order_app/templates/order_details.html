@@ -11,14 +11,19 @@
                         {{ dinner.user }}: {{ dinner.dinner }}
                 tel: {{dinner.dinner.restaurant.phone_number }}</li>
             {% endfor%}
-        </ul>
+
         <form action="{% url 'close-order' %}" method="post">
             {% csrf_token %}
             {{ form }}
+            <p><a
+                    href="{% url 'orders' %}"><button class="btn">Orders
+            </button></a></p>
             {% if order.ordered == False %}
                 <p><input class="btn btn-primary"   type="submit" value="Close order"></input></p>
             {% endif %}
         </form>
-        <a href="{% url 'orders' %}"><button>Orders</button></a>
+
+        </ul>
     </div>
+</div>
 {% endblock %}

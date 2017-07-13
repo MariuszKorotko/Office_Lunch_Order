@@ -8,15 +8,15 @@
           href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 </head>
 <body>
-{% block content %}
-<div> content </div>
+<div class="container">
+    <div class="jumbotron">
+        <h2>Office lunch order <small>version 2.0</small></h2>
+          {% block content %}
+    </div>
+</div>
 {% endblock %}
 <footer>
-    <strong>
-        Date: {{ now }}
-        | App: {{ application }}
-        | version: {{ version }}
-    </strong>
+        Date: {{ now }} Owner: {{ owner }}
 </footer>
 </body>
 </html>
