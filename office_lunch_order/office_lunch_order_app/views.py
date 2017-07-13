@@ -2,6 +2,7 @@ from django.contrib.auth.mixins	import LoginRequiredMixin
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.views import View
 from .forms import Order, NewOrderForm, OrderedDinnersForm, CloseOrderForm
+from .models import Restaurant
 
 class OrdersView(LoginRequiredMixin, View):
     """GET display orders ordered by date"""
@@ -49,11 +50,13 @@ class OrderDetailsView(LoginRequiredMixin, View):
         """Display all dinners to choose"""
         order = Order.objects.get(pk=id)
         ordered_dinners = order.ordereddinners_set.all()
+        restaurants = Restaurant.objects.order_by('name')
         # initial CloseOrderForm using id from CloseOrderForm which is hidden
         form = CloseOrderForm(initial={'id': id})
         context = {
             "order": order,
             "ordered_dinners": ordered_dinners,
+            "restaurants": restaurants,
             "form": form
         }
         return render(request, "order_details.html", context)

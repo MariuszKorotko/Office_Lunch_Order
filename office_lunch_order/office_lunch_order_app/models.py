@@ -16,7 +16,7 @@ class Dinner(models.Model):
     name = models.CharField(max_length=128)
     restaurant = models.ForeignKey(Restaurant, default=1)
     description = models.TextField()
-    price = models.FloatField()
+    price = models.DecimalField(max_digits=6, decimal_places=2)
 
     def __str__(self):
         """Display menu with name of restaurant, dinner nam and price"""

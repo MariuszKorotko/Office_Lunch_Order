@@ -1,23 +1,31 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <div class="panel panel-primary">
+<div class="panel panel-primary">
     <div class="panel-heading"><strong>Orders:</strong></div>
     <div class="panel-body">
-      <ul>
-        {% for order in orders %}
-          <a href="/order_details/{{ order.id }}" class="list-group-item">
-            {{ order.name }} ({{ order.add_date }})
-            {% if order.ordered == False %}
-            <a href="/add_order/{{ order.id }}"><button class="btn">Join
-              order</button></a>
-            {% endif %}
-          </a>
-        {% endfor %}
-        <p><a href="{% url 'new-order' %}"><button class="btn">New order</button></a></p>
-        <p><a href="{% url 'logged-out' %}"><button class="btn btn-primary">
-        Logout</button></a></p>
-      </ul>
+        <ul>
+            {% for order in orders %}
+            <li class="list-group-item"><a href="/order_details/{{ order.id }}">
+                {{ order.name }} ({{ order.add_date }})</a>
+                {% if order.ordered == False %}
+                <a href="/add_order/{{ order.id }}">
+                    <button class="btn">Join
+                        order
+                    </button>
+                </a>
+                {% endif %}
+                {% endfor %}
+            </li>
+        </ul>
+        <a href="{% url 'new-order' %}">
+            <button class="btn">New order</button>
+        </a>
+        <a href="{% url 'logged-out' %}">
+            <button class="btn btn-primary">
+                Logout
+            </button>
+        </a>
     </div>
-  </div>
-    {% endblock %}
+</div>
+{% endblock %}

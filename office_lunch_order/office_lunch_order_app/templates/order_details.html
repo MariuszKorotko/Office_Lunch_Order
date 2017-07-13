@@ -5,25 +5,36 @@
     <div class="panel-body">
         <p>{{ order.name }} - {{ order.add_date }}</p>
         <p>Dzisiaj zamawia: <strong>{{ order.ordering_user }}</strong></p>
-        <ul>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Kto:</th>
+                <th>Co:</th>
+                <th>Za ile:</th>
+                <th>Gdzie:</th>
+                <th>Telefon:</th>
+            </tr>
+            </thead>
+            <tbody>
             {% for dinner in ordered_dinners %}
-                <li class="list-group-item">
-                        {{ dinner.user }}: {{ dinner.dinner }}
-                tel: {{dinner.dinner.restaurant.phone_number }}</li>
+            <tr>
+                <td>{{ dinner.user }}</td>
+                <td>{{ dinner.dinner.name }}</td>
+                <td>{{ dinner.dinner.price }}</td>
+                <td>{{ dinner.dinner.restaurant.name }}</td>
+                <td>{{ dinner.dinner.restaurant.phone_number }}</td>
+            </tr>
             {% endfor%}
-
+            </tbody>
+        </table>
         <form action="{% url 'close-order' %}" method="post">
             {% csrf_token %}
             {{ form }}
-            <p><a
-                    href="{% url 'orders' %}"><button class="btn">Orders
-            </button></a></p>
             {% if order.ordered == False %}
-                <p><input class="btn btn-primary"   type="submit" value="Close order"></input></p>
+            <input class="btn btn-primary" type="submit"
+                      value="Close order"></input>
             {% endif %}
         </form>
-
-        </ul>
     </div>
 </div>
 {% endblock %}
