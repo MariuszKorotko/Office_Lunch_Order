@@ -1,7 +1,8 @@
 from django.contrib.auth.mixins	import LoginRequiredMixin
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.views import View
-from .forms import Order, NewOrderForm, OrderedDinnersForm, CloseOrderForm
+from .forms import Order, NewOrderForm, OrderedDinnersForm, \
+    CloseOrderForm
 from .models import Restaurant
 
 class OrdersView(LoginRequiredMixin, View):
@@ -27,14 +28,13 @@ class NewOrderView(LoginRequiredMixin, View):
             return redirect('/add_order/{}'.format(order.id))
 
 class AddOrderView(LoginRequiredMixin, View):
-
     def get(self, request, id):
         """Default data for user and order"""
         form = OrderedDinnersForm(initial={'user': request.user,
                                            'order': id
                                            })
         context = {
-            "form": form
+            "form": form,
         }
         return render(request, "new_order.html", context)
 
