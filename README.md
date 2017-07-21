@@ -10,8 +10,7 @@ This app help you to order lunch in your company simply way!
 ### Views:
 
 **- OrdersView display last 8 orders:**
-=======================================
-```
+```python
 class OrdersView(LoginRequiredMixin, generic.ListView):
     template_name = 'office_lunch_order/orders.html'
 
@@ -24,7 +23,7 @@ class OrdersView(LoginRequiredMixin, generic.ListView):
 
 **- NewOrderView create new order using GET and POST method:
 
-```
+```python
 class NewOrderView(LoginRequiredMixin, View):
     def get(self, request):
         form = NewOrderForm()
@@ -42,7 +41,7 @@ class NewOrderView(LoginRequiredMixin, View):
 
 - AddOrderView add lunches into order:
 
-```
+```python
 class AddOrderView(LoginRequiredMixin, View):
     def get(self, request, id):
         """Default data for user and order"""
@@ -64,7 +63,7 @@ class AddOrderView(LoginRequiredMixin, View):
 
 - OrderDetailsView:
 
-```
+```python
 class OrderDetailsView(LoginRequiredMixin, View):
     def get(self, request, id):
         """Display all dinners to choose"""
@@ -84,7 +83,7 @@ class OrderDetailsView(LoginRequiredMixin, View):
 
 - CloseOrderView - can't join if order is closed:
 
-```
+```python
 class CloseOrderView(LoginRequiredMixin, View):
     def post(self, request):
         """Send data using POST and change value of ordered from Order's
