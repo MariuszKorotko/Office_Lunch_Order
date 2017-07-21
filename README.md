@@ -39,7 +39,7 @@ class NewOrderView(LoginRequiredMixin, View):
             return redirect('/officelunchorder/add_order/{}/'.format(order.id))
 ```
 
-- AddOrderView add lunches into order:
+**- AddOrderView add lunches into order:**
 
 ```python
 class AddOrderView(LoginRequiredMixin, View):
@@ -61,7 +61,7 @@ class AddOrderView(LoginRequiredMixin, View):
             return redirect('/officelunchorder/orders/')
 ```
 
-- OrderDetailsView:
+**- OrderDetailsView:**
 
 ```python
 class OrderDetailsView(LoginRequiredMixin, View):
@@ -81,7 +81,7 @@ class OrderDetailsView(LoginRequiredMixin, View):
         return render(request, "office_lunch_order/order_details.html", context)
 ```
 
-- CloseOrderView - can't join if order is closed:
+**- CloseOrderView - can't join if order is closed:**
 
 ```python
 class CloseOrderView(LoginRequiredMixin, View):
