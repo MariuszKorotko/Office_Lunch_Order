@@ -8,7 +8,9 @@ This app help you to order lunch in your company simply way!
 - OrderedDinners (relationship many-to-one with User, Dinner, Order models)
 
 ### Views:
+
 - OrdersView display last 8 orders:
+
 ```
 class OrdersView(LoginRequiredMixin, generic.ListView):
     template_name = 'office_lunch_order/orders.html'
@@ -19,7 +21,9 @@ class OrdersView(LoginRequiredMixin, generic.ListView):
     def get_queryset(self):
         return Order.objects.order_by('-add_date')[:8]
 ```
+
 - NewOrderView create new order using GET and POST method:
+
 ```
 class NewOrderView(LoginRequiredMixin, View):
     def get(self, request):
@@ -35,7 +39,9 @@ class NewOrderView(LoginRequiredMixin, View):
             order = form.save()
             return redirect('/officelunchorder/add_order/{}/'.format(order.id))
 ```
+
 - AddOrderView add lunches into order:
+
 ```
 class AddOrderView(LoginRequiredMixin, View):
     def get(self, request, id):
@@ -55,7 +61,9 @@ class AddOrderView(LoginRequiredMixin, View):
             form.save()
             return redirect('/officelunchorder/orders/')
 ```
+
 - OrderDetailsView:
+
 ```
 class OrderDetailsView(LoginRequiredMixin, View):
     def get(self, request, id):
@@ -73,7 +81,9 @@ class OrderDetailsView(LoginRequiredMixin, View):
         }
         return render(request, "office_lunch_order/order_details.html", context)
 ```
+
 - CloseOrderView - can't join if order is closed:
+
 ```
 class CloseOrderView(LoginRequiredMixin, View):
     def post(self, request):
