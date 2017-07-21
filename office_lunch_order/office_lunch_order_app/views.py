@@ -1,18 +1,21 @@
 from django.contrib.auth.mixins	import LoginRequiredMixin
 from django.shortcuts import render, redirect, HttpResponseRedirect
-from django.views import View
-from .forms import Order, NewOrderForm, OrderedDinnersForm, CloseOrderForm
-from .models import Restaurant
+from django.views import View, generic
+from .forms import NewOrderForm, OrderedDinnersForm, CloseOrderForm
+from .models import Restaurant, Order
 
 def index(request):
     return render(request, "office_lunch_order/index.html")
 
-class OrdersView(LoginRequiredMixin, View):
-    """GET display orders ordered by date"""
-    def get(self, request):
-        orders = Order.objects.order_by('-add_date')
-        context = { "orders": orders }
-        return render(request, "office_lunch_order/orders.html", context)
+class OrdersView(LoginRequiredMixin, generic.ListView):
+    template_name = 'office_lunch_order/orders.html'
+
+    # Alternative solution viriable orders in orders.html instead order_list
+    # context_object_name = 'orders'
+
+    def get_queryset(self):
+        return Order.objects.order_by('-add_date')[:8]
+
 
 class NewOrderView(LoginRequiredMixin, View):
     def get(self, request):
