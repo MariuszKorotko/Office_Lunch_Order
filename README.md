@@ -9,8 +9,8 @@ This app help you to order lunch in your company simply way!
 
 ### Views:
 
-- OrdersView display last 8 orders:
-
+**- OrdersView display last 8 orders:**
+=======================================
 ```
 class OrdersView(LoginRequiredMixin, generic.ListView):
     template_name = 'office_lunch_order/orders.html'
@@ -22,7 +22,7 @@ class OrdersView(LoginRequiredMixin, generic.ListView):
         return Order.objects.order_by('-add_date')[:8]
 ```
 
-- NewOrderView create new order using GET and POST method:
+**- NewOrderView create new order using GET and POST method:
 
 ```
 class NewOrderView(LoginRequiredMixin, View):
