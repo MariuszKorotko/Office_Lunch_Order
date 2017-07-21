@@ -55,6 +55,37 @@ class AddOrderView(LoginRequiredMixin, View):
             form.save()
             return redirect('/officelunchorder/orders/')
 ```
-### Templates:
+- OrderDetailsView:
+```
+class OrderDetailsView(LoginRequiredMixin, View):
+    def get(self, request, id):
+        """Display all dinners to choose"""
+        order = Order.objects.get(pk=id)
+        ordered_dinners = order.ordereddinners_set.all()
+        restaurants = Restaurant.objects.order_by('name')
+        # initial CloseOrderForm using id from CloseOrderForm which is hidden
+        form = CloseOrderForm(initial={'id': id})
+        context = {
+            "order": order,
+            "ordered_dinners": ordered_dinners,
+            "restaurants": restaurants,
+            "form": form
+        }
+        return render(request, "office_lunch_order/order_details.html", context)
+```
+- CloseOrderView - can't join if order is closed:
+```
+class CloseOrderView(LoginRequiredMixin, View):
+    def post(self, request):
+        """Send data using POST and change value of ordered from Order's
+        model"""
+        form = CloseOrderForm(request.POST)
+        if form.is_valid():
+            id = form.cleaned_data["id"]
+            order = Order.objects.get(pk=id)
+            order.ordered = True
+            order.save()
+        return HttpResponseRedirect('/officelunchorder/orders/')
+```
 
 
