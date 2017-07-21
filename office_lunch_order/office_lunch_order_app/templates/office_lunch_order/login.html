@@ -1,0 +1,16 @@
+{% extends 'office_lunch_order/base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<form action="{% url 'office_lunch_order_app:login' %}" method="post">
+    {% csrf_token %}
+    <div class="panel panel-primary">
+        <div class="panel-heading"><strong>Login:</strong></div>
+        <div class="panel-body">
+            {{ form }}
+            <input class="btn btn-primary" type="submit" value="Login">
+        </div>
+    </div>
+</form>
+{% endblock %}

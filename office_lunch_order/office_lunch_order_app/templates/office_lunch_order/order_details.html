@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'office_lunch_order/base.html' %}
 {% block content %}
 <div class="panel panel-primary">
     <div class="panel-heading"><strong>Order details:</strong></div>
@@ -27,7 +27,8 @@
             {% endfor%}
             </tbody>
         </table>
-        <form action="{% url 'close-order' %}" method="post">
+        <form action="{% url 'office_lunch_order_app:close-order' %}"
+              method="post">
             {% csrf_token %}
             {{ form }}
             {% if order.ordered == False %}

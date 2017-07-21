@@ -1,0 +1,7 @@
+{% extends 'office_lunch_order/base.html' %}
+
+{% block content %}
+    <p>This simple app help you with lunch's orders in your office!</p>
+    <a href="{% url 'office_lunch_order_app:login' %}">
+        <button class="btn btn-primary">Get started now!</button></a>
+{% endblock %}

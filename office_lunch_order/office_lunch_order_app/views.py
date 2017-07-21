@@ -1,16 +1,18 @@
 from django.contrib.auth.mixins	import LoginRequiredMixin
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.views import View
-from .forms import Order, NewOrderForm, OrderedDinnersForm, \
-    CloseOrderForm
+from .forms import Order, NewOrderForm, OrderedDinnersForm, CloseOrderForm
 from .models import Restaurant
+
+def index(request):
+    return render(request, "office_lunch_order/index.html")
 
 class OrdersView(LoginRequiredMixin, View):
     """GET display orders ordered by date"""
     def get(self, request):
         orders = Order.objects.order_by('-add_date')
         context = { "orders": orders }
-        return render(request, "orders.html", context)
+        return render(request, "office_lunch_order/orders.html", context)
 
 class NewOrderView(LoginRequiredMixin, View):
     def get(self, request):
@@ -18,14 +20,13 @@ class NewOrderView(LoginRequiredMixin, View):
         context = {
             "form": form
         }
-        return render(request, "new_order.html", context)
+        return render(request, "office_lunch_order/new_order.html", context)
 
     def post(self, request):
         form = NewOrderForm(request.POST)
-
         if form.is_valid():
             order = form.save()
-            return redirect('/add_order/{}'.format(order.id))
+            return redirect('/officelunchorder/add_order/{}/'.format(order.id))
 
 class AddOrderView(LoginRequiredMixin, View):
     def get(self, request, id):
@@ -36,14 +37,14 @@ class AddOrderView(LoginRequiredMixin, View):
         context = {
             "form": form,
         }
-        return render(request, "new_order.html", context)
+        return render(request, "office_lunch_order/new_order.html", context)
 
     def post(self, request, id):
         form = OrderedDinnersForm(request.POST)
         if form.is_valid():
             form.user = request.user
             form.save()
-            return redirect('/orders/')
+            return redirect('/officelunchorder/orders/')
 
 class OrderDetailsView(LoginRequiredMixin, View):
     def get(self, request, id):
@@ -59,7 +60,7 @@ class OrderDetailsView(LoginRequiredMixin, View):
             "restaurants": restaurants,
             "form": form
         }
-        return render(request, "order_details.html", context)
+        return render(request, "office_lunch_order/order_details.html", context)
 
 class CloseOrderView(LoginRequiredMixin, View):
     def post(self, request):
@@ -71,4 +72,4 @@ class CloseOrderView(LoginRequiredMixin, View):
             order = Order.objects.get(pk=id)
             order.ordered = True
             order.save()
-        return HttpResponseRedirect('/orders/')
+        return HttpResponseRedirect('/officelunchorder/orders/')
