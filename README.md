@@ -21,7 +21,7 @@ class OrdersView(LoginRequiredMixin, generic.ListView):
         return Order.objects.order_by('-add_date')[:8]
 ```
 
-**- NewOrderView create new order using GET and POST method:
+**- NewOrderView create new order using GET and POST method:**
 
 ```python
 class NewOrderView(LoginRequiredMixin, View):
