@@ -7,22 +7,22 @@ from .models import Restaurant, Order
 def index(request):
     return render(request, "office_lunch_order/index.html")
 
+
 class OrdersView(LoginRequiredMixin, generic.ListView):
     template_name = 'office_lunch_order/orders.html'
-
     # Alternative solution viriable orders in orders.html instead order_list
     # context_object_name = 'orders'
-
     def get_queryset(self):
         return Order.objects.order_by('-add_date')[:8]
 
 
 class NewOrderView(LoginRequiredMixin, View):
+
     def get(self, request):
         form = NewOrderForm()
         context = {
-            "form": form
-        }
+                   "form": form
+                  }
         return render(request, "office_lunch_order/new_order.html", context)
 
     def post(self, request):
@@ -31,15 +31,15 @@ class NewOrderView(LoginRequiredMixin, View):
             order = form.save()
             return redirect('/officelunchorder/add_order/{}/'.format(order.id))
 
+
 class AddOrderView(LoginRequiredMixin, View):
+
     def get(self, request, id):
         """Default data for user and order"""
         form = OrderedDinnersForm(initial={'user': request.user,
                                            'order': id
                                            })
-        context = {
-            "form": form,
-        }
+        context = {"form": form,}
         return render(request, "office_lunch_order/new_order.html", context)
 
     def post(self, request, id):
@@ -49,7 +49,9 @@ class AddOrderView(LoginRequiredMixin, View):
             form.save()
             return redirect('/officelunchorder/orders/')
 
+
 class OrderDetailsView(LoginRequiredMixin, View):
+
     def get(self, request, id):
         """Display all dinners to choose"""
         order = Order.objects.get(pk=id)
@@ -58,14 +60,16 @@ class OrderDetailsView(LoginRequiredMixin, View):
         # initial CloseOrderForm using id from CloseOrderForm which is hidden
         form = CloseOrderForm(initial={'id': id})
         context = {
-            "order": order,
-            "ordered_dinners": ordered_dinners,
-            "restaurants": restaurants,
-            "form": form
-        }
+                   "order": order,
+                   "ordered_dinners": ordered_dinners,
+                   "restaurants": restaurants,
+                   "form": form
+                  }
         return render(request, "office_lunch_order/order_details.html", context)
 
+
 class CloseOrderView(LoginRequiredMixin, View):
+
     def post(self, request):
         """Send data using POST and change value of ordered from Order's
         model"""
