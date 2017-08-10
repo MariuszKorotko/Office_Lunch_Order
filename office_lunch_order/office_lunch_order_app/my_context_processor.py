@@ -1,4 +1,4 @@
-from datetime import datetime
+import datetime
 
 def footer_cp(request):
     """Display data time, name of application and application's version"""

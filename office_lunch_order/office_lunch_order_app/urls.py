@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from django.contrib.auth import views as auth_views
-from office_lunch_order_app.views import index, OrdersView, NewOrderView, \
+from .views import index, OrdersView, NewOrderView, \
     AddOrderView, OrderDetailsView, CloseOrderView
 
 app_name = 'office_lunch_order_app'
