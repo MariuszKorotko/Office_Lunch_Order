@@ -20,9 +20,7 @@ class NewOrderView(LoginRequiredMixin, View):
 
     def get(self, request):
         form = NewOrderForm()
-        context = {
-                   "form": form
-                  }
+        context = {"form": form}
         return render(request, "office_lunch_order/new_order.html", context)
 
     def post(self, request):
@@ -39,7 +37,7 @@ class AddOrderView(LoginRequiredMixin, View):
         form = OrderedDinnersForm(initial={'user': request.user,
                                            'order': id
                                            })
-        context = {"form": form,}
+        context = {"form": form}
         return render(request, "office_lunch_order/new_order.html", context)
 
     def post(self, request, id):

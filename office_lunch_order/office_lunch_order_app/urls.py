@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from django.contrib.auth import views as auth_views
-from .views import index, OrdersView, NewOrderView, \
-    AddOrderView, OrderDetailsView, CloseOrderView
+from .views import index, OrdersView, NewOrderView, AddOrderView, \
+    OrderDetailsView, CloseOrderView
 
 app_name = 'office_lunch_order_app'
 urlpatterns = [
