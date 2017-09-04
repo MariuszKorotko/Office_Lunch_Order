@@ -12,4 +12,5 @@ response.status_code # 200
 response.content
 response = c.get('/officelunchorder/orders/')
 response.status_code # 302 found
-print(response.content)
+response = c.get('/officelunchorder/new_order/')
+response.status_code # 302 found
