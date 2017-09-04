@@ -10,7 +10,7 @@ def index(request):
 
 class OrdersView(LoginRequiredMixin, generic.ListView):
     template_name = 'office_lunch_order/orders.html'
-    # Alternative solution viriable orders in orders.html instead order_list
+    # Alternative solution for orders in orders.html instead order_list
     # context_object_name = 'orders'
     def get_queryset(self):
         return Order.objects.order_by('-add_date')[:8]
