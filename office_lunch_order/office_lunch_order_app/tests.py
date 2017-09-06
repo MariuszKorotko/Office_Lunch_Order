@@ -14,5 +14,5 @@ response = c.get('/officelunchorder/orders/')
 response.status_code # 302 found
 response = c.get('/officelunchorder/new_order/')
 response.status_code # 302 found
-response = c.post('/officelunchorder/new_order/')
-response.status_code # 302 found
+response = c.post('/officelunchorder/close_order/')
+print(response.status_code) # 302 found
