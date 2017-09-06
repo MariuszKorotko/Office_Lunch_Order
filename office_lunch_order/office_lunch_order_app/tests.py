@@ -14,10 +14,9 @@ response = c.get('/officelunchorder/orders/')
 response.status_code # 302 found
 response = c.get('/officelunchorder/new_order/')
 response.status_code # 302 found
-response = c.get('/officelunchorder/add_order/25/') # existing order_id
+response = c.get('/officelunchorder/add_order/')# example of existing order id
 response.status_code # 302 found
 response = c.get('/officelunchorder/order_details/25/') # existing order_id
 response.status_code # 302 found
 response = c.post('/officelunchorder/close_order/')
 response.status_code # 302 found
-
