@@ -1,8 +1,8 @@
 from django.contrib.auth.mixins	import LoginRequiredMixin
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.views import View, generic
-from .forms import NewOrderForm, OrderedDinnersForm, CloseOrderForm
-from .models import Restaurant, Order
+from .forms import CloseOrderForm, OrderedDinnersForm, NewOrderForm
+from .models import Order, Restaurant
 
 def index(request):
     return render(request, "office_lunch_order/index.html")
