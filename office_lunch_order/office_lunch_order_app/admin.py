@@ -5,7 +5,7 @@ from .models import Restaurant, Dinner, Order
 @admin.register(Restaurant)
 class RestaurantAdmin(admin.ModelAdmin):
     fieldsets = [
-        ("Restaurant's name",                {'fields': ['name']}),
+        ("Restaurant's name", {'fields': ['name']}),
         ("Phone's number:", {'fields': ['phone_number']}),
     ]
 
