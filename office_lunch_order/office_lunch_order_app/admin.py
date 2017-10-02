@@ -8,6 +8,8 @@ class RestaurantAdmin(admin.ModelAdmin):
         ("Restaurant's name", {'fields': ['name']}),
         ("Phone's number:", {'fields': ['phone_number']}),
     ]
+    search_fields = ['name']
+
 
 @admin.register(Dinner)
 class DinnerAdmin(admin.ModelAdmin):
@@ -17,6 +19,7 @@ class DinnerAdmin(admin.ModelAdmin):
         ("Restaurant:", {'fields':  ["restaurant"]}),
         ('Description:', {'fields': ["description"]}),
     ]
+    search_fields = ['name']
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
