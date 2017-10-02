@@ -12,7 +12,8 @@ class RestaurantAdmin(admin.ModelAdmin):
 @admin.register(Dinner)
 class DinnerAdmin(admin.ModelAdmin):
     fieldsets = [
-        (None, {'fields': ['name']}),('Price:', {'fields':['price']}),
+        (None, {'fields': ['name']}),
+        ('Price:', {'fields':['price']}),
         ("Restaurant:", {'fields':  ["restaurant"]}),
         ('Description:', {'fields': ["description"]}),
     ]
