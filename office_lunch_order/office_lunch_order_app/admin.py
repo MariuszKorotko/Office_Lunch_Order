@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Restaurant, Dinner, Order
+from .models import Dinner, Order, Restaurant
 
 
 @admin.register(Restaurant)
