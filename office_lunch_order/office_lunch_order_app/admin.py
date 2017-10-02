@@ -4,8 +4,10 @@ from .models import Restaurant, Dinner, Order
 
 @admin.register(Restaurant)
 class RestaurantAdmin(admin.ModelAdmin):
-    list_display = ("name", "phone_number")
-
+    fieldsets = [
+        ("Restaurant's name",                {'fields': ['name']}),
+        ("Phone's number:", {'fields': ['phone_number']}),
+    ]
 
 @admin.register(Dinner)
 class DinnerAdmin(admin.ModelAdmin):
