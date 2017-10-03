@@ -20,6 +20,7 @@ class DinnerAdmin(admin.ModelAdmin):
         ('Description:', {'fields': ["description"]}),
     ]
     search_fields = ['name']
+    radio_fields = {"restaurant": admin.VERTICAL}
 
 
 @admin.register(Order)
