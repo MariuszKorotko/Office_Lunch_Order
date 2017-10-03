@@ -21,6 +21,7 @@ class DinnerAdmin(admin.ModelAdmin):
     ]
     search_fields = ['name']
 
+
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
     list_display = ("name", "add_date", "ordering_user", "ordered")
