@@ -20,6 +20,9 @@ class DinnerAdmin(admin.ModelAdmin):
     ]
     search_fields = ['name']
     radio_fields = {"restaurant": admin.VERTICAL}
+    list_filter = (
+        ('restaurant', admin.RelatedOnlyFieldListFilter),
+    )
 
 
 @admin.register(Order)
