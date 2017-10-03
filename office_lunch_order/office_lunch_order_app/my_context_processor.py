@@ -1,7 +1,7 @@
 import datetime
 
 def footer_cp(request):
-    """Display data time, name of application and application's version"""
+    """Display data time and first and last name of the owner."""
     context = {
                 "now": datetime.datetime.now(),
                 "owner" : "Mariusz Korotko"
