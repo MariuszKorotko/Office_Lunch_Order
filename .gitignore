@@ -57,6 +57,7 @@ local_settings.py
 db.*
 manage.py
 __init__.py
+settings.py
 
 # Flask stuff:
 instance/
