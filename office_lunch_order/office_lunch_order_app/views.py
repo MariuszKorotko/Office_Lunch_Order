@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins	import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.views import View, generic
 from .forms import CloseOrderForm, OrderedDinnersForm, NewOrderForm
@@ -40,7 +40,7 @@ class AddOrderView(LoginRequiredMixin, View):
         context = {"form": form}
         return render(request, "office_lunch_order/new_order.html", context)
 
-    def post(self, request, id):
+    def post(self, request):
         form = OrderedDinnersForm(request.POST)
         if form.is_valid():
             form.user = request.user
