@@ -12,7 +12,7 @@ urlpatterns = [
     url(r'^logout/$', auth_views.logout,
         {'template_name': 'office_lunch_order/logged_out.html'},
         name='logged-out'),
-    url(r'^orders/$', OrdersView.as_view(),name='orders'),
+    url(r'^orders/$', OrdersView.as_view(), name='orders'),
     url(r'^new_order/$', NewOrderView.as_view(), name="new-order"),
     url(r'^add_order/(?P<id>(\d)+)/$', AddOrderView.as_view(),
         name="add-order"),
