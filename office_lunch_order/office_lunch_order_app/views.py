@@ -4,6 +4,7 @@ from django.views import View, generic
 from .forms import CloseOrderForm, OrderedDinnersForm, NewOrderForm
 from .models import Order, Restaurant
 
+
 def index(request):
     return render(request, "office_lunch_order/index.html")
 
@@ -12,12 +13,12 @@ class OrdersView(LoginRequiredMixin, generic.ListView):
     template_name = 'office_lunch_order/orders.html'
     # Alternative solution for orders in orders.html instead order_list
     # context_object_name = 'orders'
+
     def get_queryset(self):
         return Order.objects.order_by('-add_date')[:8]
 
 
 class NewOrderView(LoginRequiredMixin, View):
-
     def get(self, request):
         form = NewOrderForm()
         context = {"form": form}
@@ -31,7 +32,6 @@ class NewOrderView(LoginRequiredMixin, View):
 
 
 class AddOrderView(LoginRequiredMixin, View):
-
     def get(self, request, id):
         """Default data for user and order"""
         form = OrderedDinnersForm(initial={'user': request.user,
