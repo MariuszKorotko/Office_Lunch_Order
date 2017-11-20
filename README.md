@@ -14,7 +14,7 @@ This app help you to order lunch in your company simply way!
 class OrdersView(LoginRequiredMixin, generic.ListView):
     template_name = 'office_lunch_order/orders.html'
 
-    # Alternative solution viriable orders in orders.html instead order_list
+    # Alternative solution for variable orders in orders.html instead order_list
     # context_object_name = 'orders'
 
     def get_queryset(self):
