@@ -15,7 +15,8 @@ class Restaurant(models.Model):
                                     blank=True)
 
     def __str__(self):
-        return self.name```
+        return self.name
+```
 **- Dinner:**
 ```python
 class Dinner(models.Model):
@@ -29,7 +30,8 @@ class Dinner(models.Model):
         result = "{} - {} ({} PLN)".format(self.restaurant.name,
                                            self.name,
                                            self.price)
-        return result```
+        return result
+```
 - Order (relationship many-to-many through OrderedDinners model)
 - OrderedDinners (relationship many-to-one with User, Dinner, Order models)
 
