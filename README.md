@@ -2,6 +2,7 @@
 This app help you to order lunch in your company simply way!
 
 ### Models:
+
 **- Restaurant:**
 ```python
 class Restaurant(models.Model):
@@ -17,6 +18,7 @@ class Restaurant(models.Model):
     def __str__(self):
         return self.name
 ```
+
 **- Dinner:**
 ```python
 class Dinner(models.Model):
@@ -32,12 +34,31 @@ class Dinner(models.Model):
                                            self.price)
         return result
 ```
-- Order (relationship many-to-many through OrderedDinners model)
-- OrderedDinners (relationship many-to-one with User, Dinner, Order models)
+**- Order:**
+```python
+class Order(models.Model):
+    name = models.CharField(max_length=256, default="Zamawiamy obiad na 13.00!")
+    ordering_user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    dinners = models.ManyToManyField(Dinner, through='OrderedDinners')
+    ordered = models.BooleanField(default=False)
+    add_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+```
+
+**- OrderedDinners:**
+```python
+class OrderedDinners(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    dinner = models.ForeignKey(Dinner)
+    order = models.ForeignKey(Order)
+```
 
 ### Views:
 
 **- OrdersView display last 8 orders:**
+
 ```python
 class OrdersView(LoginRequiredMixin, generic.ListView):
     template_name = 'office_lunch_order/orders.html'
