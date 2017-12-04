@@ -15,9 +15,21 @@ class Restaurant(models.Model):
                                     blank=True)
 
     def __str__(self):
-        return self.name
-```
-- Dinner (relationship many-to-one with Restaurant)
+        return self.name```
+**- Dinner:**
+```python
+class Dinner(models.Model):
+    name = models.CharField(max_length=128)
+    restaurant = models.ForeignKey(Restaurant, default=1)
+    description = models.TextField()
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+
+    def __str__(self):
+        """Display menu with name of restaurant, dinner, and price"""
+        result = "{} - {} ({} PLN)".format(self.restaurant.name,
+                                           self.name,
+                                           self.price)
+        return result```
 - Order (relationship many-to-many through OrderedDinners model)
 - OrderedDinners (relationship many-to-one with User, Dinner, Order models)
 
