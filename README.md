@@ -2,7 +2,21 @@
 This app help you to order lunch in your company simply way!
 
 ### Models:
-- Restaurant (phone_regex field).
+**- Restaurant:**
+```python
+class Restaurant(models.Model):
+    name = models.CharField(max_length=256)
+    phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$',
+                                 message="""Phone number must be entered in
+                                            the format: '+999999999'.
+                                            Up to 15 digits allowed.""")
+    phone_number = models.CharField(max_length=64,
+                                    validators=[phone_regex],
+                                    blank=True)
+
+    def __str__(self):
+        return self.name
+```
 - Dinner (relationship many-to-one with Restaurant)
 - Order (relationship many-to-many through OrderedDinners model)
 - OrderedDinners (relationship many-to-one with User, Dinner, Order models)
